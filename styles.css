@@ -10,11 +10,18 @@ body {
 }
 
 header {
-    background-color: #5c08aa;
+    background-color: #4b028f;
     display: flex;
-    justify-content: end;
+    justify-content: space-between;
     align-items: center;
     height: 4.5rem;
+}
+
+h1 {
+    font-weight: 800;
+    color: #04c1c1;
+    margin-left: 2rem;
+    text-shadow: 0 2px 6px #3c0470;
 }
 
 button {
