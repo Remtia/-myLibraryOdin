@@ -1,5 +1,6 @@
 const button = document.querySelector('button');
 const bookshelf = document.querySelector('.bookshelf');
+const library = [];
 
 function Book (title, author, pages, hasRead) {
     this.title = title;
@@ -9,5 +10,5 @@ function Book (title, author, pages, hasRead) {
 }
 
 function addBook (title, author, pages, hasRead) {
-    
+
 }
