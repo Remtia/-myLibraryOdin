@@ -1,21 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>Document</title>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+    <title>My library</title>
+  </head>
+  <body>
     <header>
-        <h1>My Library</h1>
-        <button>+ Add new book</button>
+      <h1>My Library</h1>
+      <button type="button" class="display-popup">+ Add new book</button>
     </header>
 
     <main>
-        <div class="bookshelf">
+      <div class="bookshelf"></div>
 
+      <div class="overlay">
+        <div class="input-form-modal">
+          <form class="form-content">
+            <h2>Add a new book</h2>
+            <label for="title">Book's title:</label>
+            <input id="title" type="text" required/>
+
+            <label for="author">Book's author:</label>
+            <input id="author" type="text" required/>
+
+            <label for="pages">Number of pages:</label>
+            <input id="pages" type="number" min="1" required/>
+
+            <label for="has-read">Have you read?:</label>
+            <input id="has-read" type="checkbox" />
+
+            <ul>
+              <li><button id="cancel" type="button">Cancel</button></li>
+              <li><button id="add-book" type="submit">Add book</button></li>
+            </ul>
+          </form>
         </div>
+      </div>
     </main>
-</body>
+  </body>
 </html>
