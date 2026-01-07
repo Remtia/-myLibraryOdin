@@ -154,3 +154,43 @@ input{
     width: 1.5rem;
 }
 
+.bookshelf{
+    display: grid;
+    width: 85%;
+    margin: 0 auto;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1.5rem;
+    padding: 1.5rem;
+}
+
+.book-card {
+    background-color: #4b028f;
+    color: white;
+    border-radius: 8px;
+    padding: 3rem 1rem;
+
+}
+
+.book-card-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    text-align: center;
+    width: 90%;
+    margin: 0 auto;
+    overflow: wrap;
+
+}
+
+.read {
+    background-color: rgb(2, 207, 2);
+    padding: 0.3rem 0.5rem;
+    border-radius: 5px;
+}
+.not-read {
+    background-color: #c70202cf;
+    padding: 0.3rem 0.5rem;
+    border-radius: 5px;
+}

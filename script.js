@@ -2,12 +2,13 @@ const displayPopupBtn = document.querySelector(".display-popup");
 const cancelBtn = document.querySelector("#cancel");
 const addBookBtn = document.querySelector("#add-book");
 const popup = document.querySelector(".overlay");
+const form = document.querySelector('.form-content');
 const bookshelf = document.querySelector(".bookshelf");
-const library = [];
 const titleInput = document.querySelector("#title");
 const authorInput = document.querySelector("#author");
 const pagesInput = document.querySelector("#pages");
 const haveReadInput = document.querySelector("#has-read");
+const library = [];
 
 function Book(title, author, pages, hasRead) {
   this.title = title;
@@ -46,7 +47,7 @@ function validateForm() {
 
     if (authorInput.value.trim() === '') {
         authorInput.style.border = "2px solid red";
-        authorInput.placeholder = "Enter the book title";
+        authorInput.placeholder = "Enter the author's name";
         authorInput.focus();
         return false;
     }
@@ -61,6 +62,45 @@ function validateForm() {
 }
 
 
+function renderBook() {
+    bookshelf.innerHTML = '';
+
+    library.forEach((book) => {
+        const card = document.createElement('div');
+        card.classList.add('book-card');
+
+        const cardContent = document.createElement('div');
+        cardContent.classList.add('book-card-content');
+
+        const title = document.createElement('h3');
+        title.textContent = book.title;
+
+        const authorDiv = document.createElement('div');
+        const by = document.createElement('p')
+        by.innerText = `by`;
+        by.style.fontStyle = "italic";
+        by.style.marginBottom = "3px"
+
+        const author = document.createElement('p');
+        author.textContent = `${book.author}`;
+
+        authorDiv.append(by, author)
+
+        const pages = document.createElement('p');
+        pages.textContent = `${book.pages} pages`;
+
+        const status = document.createElement('span');
+        status.textContent = book.hasRead ? 'Read' : 'Not read';
+        status.classList.add(book.hasRead ? 'read' : 'not-read');
+
+        cardContent.append(title, authorDiv, pages, status);
+        card.append(cardContent);
+        bookshelf.appendChild(card);
+    });
+}
+
+
+
 addBookBtn.addEventListener("click", (e) => {
   e.preventDefault();
 
@@ -73,5 +113,9 @@ addBookBtn.addEventListener("click", (e) => {
 
   addBookToShelf(bookTitle, bookAuthor, bookPages, haveReadBook);
 
-  popup.classList.remove('active')
+  renderBook();
+  form.reset();
+  popup.classList.remove('active');
 });
+
+
