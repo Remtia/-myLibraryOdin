@@ -188,9 +188,11 @@ input{
     background-color: rgb(2, 207, 2);
     padding: 0.3rem 0.5rem;
     border-radius: 5px;
+    color: #f3eff6;
 }
 .not-read {
     background-color: #c70202cf;
     padding: 0.3rem 0.5rem;
     border-radius: 5px;
+    color: #f3eff6;
 }

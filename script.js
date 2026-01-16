@@ -95,9 +95,18 @@ function renderBook() {
         const pages = document.createElement('p');
         pages.textContent = `${book.pages} pages`;
 
-        const status = document.createElement('span');
+        const status = document.createElement('button');
         status.textContent = book.hasRead ? 'Read' : 'Not read';
         status.classList.add(book.hasRead ? 'read' : 'not-read');
+        status.addEventListener('click', () => {
+          if(book.hasRead === true) {
+            book.hasRead = false;
+          } else {
+            book.hasRead = true;
+          }
+
+          renderBook()
+        })
 
         const deleteBookBtn = document.createElement('img');
         deleteBookBtn.classList.add('trashcan');
@@ -129,4 +138,3 @@ addBookBtn.addEventListener("click", (e) => {
   form.reset();
   popup.classList.remove('active');
 });
-
