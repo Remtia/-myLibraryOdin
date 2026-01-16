@@ -141,6 +141,7 @@ input{
     font-weight: 500;
     font-size: 1rem;
     color: #240442;
+    border-radius: 3px;
 }
 
 #pages {
@@ -159,8 +160,8 @@ input{
     width: 85%;
     margin: 0 auto;
     grid-template-columns: repeat(5, 1fr);
-    gap: 1.5rem;
-    padding: 1.5rem;
+    gap: 1.2rem;
+    padding: 1.2rem;
 }
 
 .book-card {
@@ -176,11 +177,10 @@ input{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 1.5rem;
+    gap: 1rem;
     text-align: center;
     width: 90%;
     margin: 0 auto;
-    overflow: wrap;
 
 }
 

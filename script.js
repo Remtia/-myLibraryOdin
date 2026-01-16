@@ -22,6 +22,12 @@ function addBookToShelf(title, author, pages, hasRead) {
   library.push(new Book(title, author, pages, hasRead));
 }
 
+function deleteBook(id) {
+  const index = library.findIndex(book => book.id === id);
+  library.splice(index, 1);
+  renderBook();
+}
+
 displayPopupBtn.addEventListener("click", () => {
   popup.classList.add("active");
 });
@@ -93,7 +99,13 @@ function renderBook() {
         status.textContent = book.hasRead ? 'Read' : 'Not read';
         status.classList.add(book.hasRead ? 'read' : 'not-read');
 
-        cardContent.append(title, authorDiv, pages, status);
+        const deleteBookBtn = document.createElement('img');
+        deleteBookBtn.classList.add('trashcan');
+        deleteBookBtn.src = './svgviewer-output.svg';
+        deleteBookBtn.addEventListener('click', () => {
+          deleteBook(book.id)
+        })
+        cardContent.append(title, authorDiv, pages, status, deleteBookBtn);
         card.append(cardContent);
         bookshelf.appendChild(card);
     });
@@ -117,5 +129,4 @@ addBookBtn.addEventListener("click", (e) => {
   form.reset();
   popup.classList.remove('active');
 });
-
 
