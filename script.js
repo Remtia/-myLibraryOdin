@@ -2,7 +2,7 @@ const displayPopupBtn = document.querySelector(".display-popup");
 const cancelBtn = document.querySelector("#cancel");
 const addBookBtn = document.querySelector("#add-book");
 const popup = document.querySelector(".overlay");
-const form = document.querySelector('.form-content');
+const form = document.querySelector(".form-content");
 const bookshelf = document.querySelector(".bookshelf");
 const titleInput = document.querySelector("#title");
 const authorInput = document.querySelector("#author");
@@ -10,12 +10,14 @@ const pagesInput = document.querySelector("#pages");
 const haveReadInput = document.querySelector("#has-read");
 const library = [];
 
-function Book(title, author, pages, hasRead) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.hasRead = hasRead;
-  this.id = crypto.randomUUID();
+class Book {
+  constructor(title, author, pages, hasRead) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.hasRead = hasRead;
+    this.id = crypto.randomUUID();
+  }
 }
 
 function addBookToShelf(title, author, pages, hasRead) {
@@ -23,7 +25,7 @@ function addBookToShelf(title, author, pages, hasRead) {
 }
 
 function deleteBook(id) {
-  const index = library.findIndex(book => book.id === id);
+  const index = library.findIndex((book) => book.id === id);
   library.splice(index, 1);
   renderBook();
 }
@@ -44,88 +46,85 @@ popup.addEventListener("click", (e) => {
 });
 
 function validateForm() {
-    if (titleInput.value.trim() === '') {
-        titleInput.style.border = "2px solid red";
-        titleInput.placeholder = "Enter the book title";
-        titleInput.focus();
-        return false;
-    }
+  if (titleInput.value.trim() === "") {
+    titleInput.style.border = "2px solid red";
+    titleInput.placeholder = "Enter the book title";
+    titleInput.focus();
+    return false;
+  }
 
-    if (authorInput.value.trim() === '') {
-        authorInput.style.border = "2px solid red";
-        authorInput.placeholder = "Enter the author's name";
-        authorInput.focus();
-        return false;
-    }
+  if (authorInput.value.trim() === "") {
+    authorInput.style.border = "2px solid red";
+    authorInput.placeholder = "Enter the author's name";
+    authorInput.focus();
+    return false;
+  }
 
-    if (pagesInput.value === '' || pagesInput.value <= 0) {
-        pagesInput.style.border = "2px solid red";
-        pagesInput.focus();
-        return false;
-    }
+  if (pagesInput.value === "" || pagesInput.value <= 0) {
+    pagesInput.style.border = "2px solid red";
+    pagesInput.focus();
+    return false;
+  }
 
-    return true;
+  return true;
 }
-
 
 function renderBook() {
-    bookshelf.innerHTML = '';
+  bookshelf.innerHTML = "";
 
-    library.forEach((book) => {
-        const card = document.createElement('div');
-        card.classList.add('book-card');
+  library.forEach((book) => {
+    const card = document.createElement("div");
+    card.classList.add("book-card");
 
-        const cardContent = document.createElement('div');
-        cardContent.classList.add('book-card-content');
+    const cardContent = document.createElement("div");
+    cardContent.classList.add("book-card-content");
 
-        const title = document.createElement('h3');
-        title.textContent = book.title;
+    const title = document.createElement("h3");
+    title.textContent = book.title;
 
-        const authorDiv = document.createElement('div');
-        const by = document.createElement('p')
-        by.innerText = `by`;
-        by.style.fontStyle = "italic";
-        by.style.marginBottom = "3px"
+    const authorDiv = document.createElement("div");
+    const by = document.createElement("p");
+    by.innerText = `by`;
+    by.style.fontStyle = "italic";
+    by.style.marginBottom = "3px";
 
-        const author = document.createElement('p');
-        author.textContent = `${book.author}`;
+    const author = document.createElement("p");
+    author.textContent = `${book.author}`;
 
-        authorDiv.append(by, author)
+    authorDiv.append(by, author);
 
-        const pages = document.createElement('p');
-        pages.textContent = `${book.pages} pages`;
+    const pages = document.createElement("p");
+    pages.textContent = `${book.pages} pages`;
 
-        const status = document.createElement('button');
-        status.textContent = book.hasRead ? 'Read' : 'Not read';
-        status.classList.add(book.hasRead ? 'read' : 'not-read');
-        status.addEventListener('click', () => {
-          if(book.hasRead === true) {
-            book.hasRead = false;
-          } else {
-            book.hasRead = true;
-          }
+    const status = document.createElement("button");
+    status.textContent = book.hasRead ? "Read" : "Not read";
+    status.classList.add(book.hasRead ? "read" : "not-read");
+    status.addEventListener("click", () => {
+      if (book.hasRead === true) {
+        book.hasRead = false;
+      } else {
+        book.hasRead = true;
+      }
 
-          renderBook()
-        })
-
-        const deleteBookBtn = document.createElement('img');
-        deleteBookBtn.classList.add('trashcan');
-        deleteBookBtn.src = './svgviewer-output.svg';
-        deleteBookBtn.addEventListener('click', () => {
-          deleteBook(book.id)
-        })
-        cardContent.append(title, authorDiv, pages, status, deleteBookBtn);
-        card.append(cardContent);
-        bookshelf.appendChild(card);
+      renderBook();
     });
+
+    const deleteBookBtn = document.createElement("img");
+    deleteBookBtn.classList.add("trashcan");
+    deleteBookBtn.src = "./svgviewer-output.svg";
+    deleteBookBtn.addEventListener("click", () => {
+      deleteBook(book.id);
+    });
+    cardContent.append(title, authorDiv, pages, status, deleteBookBtn);
+    card.append(cardContent);
+    bookshelf.appendChild(card);
+  });
 }
-
-
 
 addBookBtn.addEventListener("click", (e) => {
   e.preventDefault();
 
-  if(!validateForm()) return;
+  if (!validateForm()) return;
 
   const bookTitle = titleInput.value;
   const bookAuthor = authorInput.value;
@@ -136,5 +135,5 @@ addBookBtn.addEventListener("click", (e) => {
 
   renderBook();
   form.reset();
-  popup.classList.remove('active');
+  popup.classList.remove("active");
 });
